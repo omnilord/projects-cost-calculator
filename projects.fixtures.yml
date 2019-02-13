@@ -1,0 +1,86 @@
+---
+- :description: Set 1
+  :projects:
+    - :name: Project 1
+      :cost: :low
+      :start_date: 9/1/15
+      :end_date: 9/3/15
+  :evaluation:
+    :low:
+      :travel_days: 2
+      :full_days: 1
+    :high:
+      :travel_days: 0
+      :full_days: 0
+    :total: 165
+- :description: Set 2
+  :projects:
+    - :name: Project 1
+      :cost: :low
+      :start_date: 9/1/15
+      :end_date: 9/1/15
+    - :name:  Project 2
+      :cost: :high
+      :start_date: 9/2/15
+      :end_date: 9/6/15
+    - :name: Project 3
+      :cost: :low
+      :start_date: 9/6/15
+      :end_date: 9/8/15
+  :evaluation:
+    :low:
+      :travel_days: 2
+      :full_days: 1
+    :high:
+      :travel_days: 0
+      :full_days: 5
+    :total: 590
+- :description: Set 3
+  :projects:
+    - :name: Project 1
+      :cost: :low
+      :start_date: 9/1/15
+      :end_date: 9/3/15
+    - :name:  Project 2
+      :cost: :high
+      :start_date: 9/5/15
+      :end_date: 9/7/15
+    - :name: Project 3
+      :cost: :high
+      :start_date: 9/8/15
+      :end_date: 9/8/15
+  :evaluation:
+    :low:
+      :travel_days: 2
+      :full_days: 1
+    :high:
+      :travel_days: 2
+      :full_days: 2
+    :total: 445
+- :description: Set 4
+  :projects:
+    - :name: Project 1
+      :cost: :low
+      :start_date: 9/1/15
+      :end_date: 9/1/15
+    - :name: Project 2
+      :cost: :low
+      :start_date: 9/1/15
+      :end_date: 9/1/15
+    - :name: Project 3
+      :cost: :high
+      :start_date: 9/2/15
+      :end_date: 9/2/15
+    - :name: Project 4
+      :cost: :high
+      :start_date: 9/2/15
+      :end_date: 9/3/15
+  :evaluation:
+    :low:
+      :travel_days: 1
+      :full_days: 0
+    :high:
+      :travel_days: 1
+      :full_days: 1
+    :total: 185
+...
