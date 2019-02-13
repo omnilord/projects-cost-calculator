@@ -59,3 +59,23 @@ Given the following sets of projects, provide code which will calculate the reim
     * low cost city: 1 travel days, 0 full day,
     * high cost city: 1 travel days, 1 full days,
     * total: 185 dollars
+
+## Execution
+
+### Setup
+
+```
+git clone https://github.com/omnilord/projects-cost-calculator.git
+cd projects-cost-calculator
+bundle install
+```
+
+### Tests
+```
+ruby cost-calculator.test.rb
+```
+
+### User-Readable Script
+```
+ruby simple-calculate.rb
+```
