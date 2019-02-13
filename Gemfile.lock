@@ -11,6 +11,7 @@ GEM
       ruby-progressbar
     minitest-spec (0.0.2.1)
       minitest (>= 3.0)
+    rake (12.3.2)
     ruby-progressbar (1.10.0)
 
 PLATFORMS
@@ -20,6 +21,7 @@ DEPENDENCIES
   minitest
   minitest-reporters
   minitest-spec
+  rake
 
 RUBY VERSION
    ruby 2.6.0p0

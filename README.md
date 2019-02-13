@@ -72,10 +72,10 @@ bundle install
 
 ### Tests
 ```
-ruby cost-calculator.test.rb
+rake test
 ```
 
 ### User-Readable Script
 ```
-ruby simple-calculate.rb
+rake
 ```

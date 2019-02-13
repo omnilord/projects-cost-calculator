@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 require 'yaml'
-require './cost-calculator'
+require_relative './cost-calculator'
 
-fixtures = YAML.load_file('./projects.fixtures.yml')
+DATAFILE = File.expand_path('projects.fixtures.yml', "#{__dir__}/data/")
+fixtures = YAML.load_file(DATAFILE)
 
 puts "\nReview #{fixtures.length} project set(s).\n"
 

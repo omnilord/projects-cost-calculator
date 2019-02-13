@@ -7,6 +7,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'rake'
+
 gem 'minitest'
 gem 'minitest-spec'
 gem 'minitest-reporters'

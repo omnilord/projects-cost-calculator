@@ -3,12 +3,14 @@
 require 'minitest/reporters'
 require 'minitest/autorun'
 require 'minitest/spec'
-require './cost-calculator'
+require_relative '../cost-calculator'
 require 'yaml'
 
 Minitest::Reporters.use!(Minitest::Reporters::SpecReporter.new)
 
-fixtures = YAML.load_file('./projects.fixtures.yml')
+DATAFILE = File.expand_path('projects.fixtures.yml', "#{__dir__}/../data/")
+
+fixtures = YAML.load_file(DATAFILE)
 
 fixtures.each do |project_set|
   lctd = project_set[:evaluation][:low][:travel]
