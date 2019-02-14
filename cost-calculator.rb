@@ -33,7 +33,11 @@ class ProjectSet
   # @param :end [Date]
   Project = Struct.new(:name, :city, :start_date, :end_date, :start, :end)
 
-  def initialize(projects: projects)
+  # Constructs a ProjectSet from a list of {ProjectSet::Project}.
+  # @param :projects[Array<Hash>] the list of projects in raw data format
+  #   consisting of a :name, :city, start_date, :end_date
+  # @return [ProjectSet]
+  def initialize(projects:)
     @projects = []
     projects.each do |project|
       @projects << ProjectSet::Project.new(project[:name],
@@ -46,7 +50,7 @@ class ProjectSet
     end
   end
 
-  # Memoise the new schedule object fromt he list of projects.
+  # Memoized schedule object from the list of projects.
   # @return [ProjectSet::Schedule]
   def schedule
     @schedule ||= ProjectSet::Schedule.new do |schedule|
@@ -82,6 +86,8 @@ class ProjectSet::Schedule
   # @param :cost [Symbol<:travel_day|:full_day>] the type of cost
   ProjectDay = Struct.new(:date, :city, :cost)
 
+  # expects a block in which the initializing school calls add_day to populate
+  # the schedule with information to be processed.
   def initialize
     @schedule = []
 
@@ -106,24 +112,29 @@ class ProjectSet::Schedule
     @schedule.reduce(memo, &block)
   end
 
+  # memoized count of low cost travel days
   def low_cost_travel_days
     @low_cost_travel_days ||= count_days(:low, :travel)
   end
 
+  # memoized count of low cost travel days
   def low_cost_full_days
     @low_cost_full_days ||= count_days(:low, :full)
   end
 
+  # memoized count of low cost travel days
   def high_cost_travel_days
     @high_cost_travel_days ||= count_days(:high, :travel)
   end
 
+  # memoized count of low cost travel days
   def high_cost_full_days
     @high_cost_full_days ||= count_days(:high, :full)
   end
 
 private
 
+  # internal function to count specified days in the schedule
   def count_days(city, cost)
     @schedule.reduce(0) do |m, day|
       m + (day.city == city && day.cost == cost ? 1 : 0)
@@ -139,6 +150,7 @@ private
     end
   end
 
+  # sort
   def sort
     @schedule.sort_by!(&:date)
   end
