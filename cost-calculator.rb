@@ -49,7 +49,15 @@ class ProjectSet
   # Memoise the new schedule object fromt he list of projects.
   # @return [ProjectSet::Schedule]
   def schedule
-    @schedule ||= ProjectSet::Schedule.new(projects: @projects)
+    @schedule ||= ProjectSet::Schedule.new do |schedule|
+
+      # Using the project's start and end dates, add the dates to the schedule
+      @projects.each do |project|
+        (project[:start]..project[:end]).each do |date|
+          schedule.add_day(date: date, city: project[:city])
+        end
+      end
+    end
   end
 
   # using the schedule, calculate the total cost of the project set.
@@ -67,21 +75,27 @@ end
 # @attribute :projects [Array<ProjectSet::Project>]
 # @attribute :schedule [Array<ProjectDay>]
 class ProjectSet::Schedule
-  attr_reader :projects, :schedule
+  attr_reader :schedule
 
   # A simple struct to keep each day in the schedule's data tidy.
   # @param :city [Symbol<:low|:high>] the level of city costs
   # @param :cost [Symbol<:travel_day|:full_day>] the type of cost
   ProjectDay = Struct.new(:date, :city, :cost)
 
-  def initialize(projects: projects)
-    @projects = projects
+  def initialize
     @schedule = []
 
-    projects.each { |project| add_project(project) }
+    # pass self to the construction block and let the project load it's days
+    # into the schedule
+    yield(self)
+
     deduplicate
     sort
     assign_types
+  end
+
+  def add_day(date:, city:)
+    @schedule << ProjectDay.new(date, city, nil)
   end
 
   # A passthrough to an internal
@@ -113,15 +127,6 @@ private
   def count_days(city, cost)
     @schedule.reduce(0) do |m, day|
       m + (day.city == city && day.cost == cost ? 1 : 0)
-    end
-  end
-
-  # Using the project's start and end dates, add the unprocessed list of dates
-  # to the schedule
-  # param project [<ProjectSet::Project>]
-  def add_project(project)
-    (project[:start]..project[:end]).each do |day|
-      @schedule << ProjectDay.new(day, project[:city], nil)
     end
   end
 
