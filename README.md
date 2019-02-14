@@ -20,6 +20,7 @@ You have a set of projects, and you need to calculate a reimbursement amount for
 
 10. The first day of any project counts as a travel day, even if it is a one or two day project.
 11. "Pushed together" is inclussive of travel days.
+12. When multiple projects overlap, use the high cost city to calculate for that day.
 
 ## validation fixtures
 
